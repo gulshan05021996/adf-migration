@@ -1,0 +1,495 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "adfsavronproject123"
+		},
+		"AzureDataLakeStorage1_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage1'"
+		},
+		"AzureDataLakeStorage10_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage10'"
+		},
+		"AzureDataLakeStorage11_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage11'"
+		},
+		"AzureDataLakeStorage2_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
+		},
+		"AzureDataLakeStorage3_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage3'"
+		},
+		"AzureDataLakeStorage4_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage4'"
+		},
+		"AzureDataLakeStorage5_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage5'"
+		},
+		"AzureDataLakeStorage6_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage6'"
+		},
+		"AzureDataLakeStorage7_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage7'"
+		},
+		"AzureDataLakeStorage8_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage8'"
+		},
+		"AzureDataLakeStorage9_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage9'"
+		},
+		"DS_SQLSERVER_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DS_SQLSERVER'"
+		},
+		"DS_sql_server_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DS_sql_server'"
+		},
+		"LS_GETMETADATA_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_GETMETADATA_CSV'"
+		},
+		"LS_Multiple_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_Multiple_CSV'"
+		},
+		"LS_SOURCE_CSV_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SOURCE_CSV'"
+		},
+		"LS_SQLSERVER_DB_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQLSERVER_DB'"
+		},
+		"LS_SQLSER_ADLS_SINK_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_SQLSER_ADLS_SINK'"
+		},
+		"LS_SQL_SERVER_Adventure_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LS_SQL_SERVER_Adventure'"
+		},
+		"LS_sink_Parquet_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_sink_Parquet'"
+		},
+		"LS_sink_multiple_csv_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_sink_multiple_csv'"
+		},
+		"LS_sorce_excel_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_sorce_excel'"
+		},
+		"LS_source_excel_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_source_excel'"
+		},
+		"SqlServer1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage10_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevsource0.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage11_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage2_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage3_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage4_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage5_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage6_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage7_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage8_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage9_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevsource0.dfs.core.windows.net/"
+		},
+		"DS_SQLSERVER_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"DS_SQLSERVER_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorksDW2025"
+		},
+		"DS_SQLSERVER_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"DS_sql_server_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"DS_sql_server_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "training"
+		},
+		"DS_sql_server_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"LS_GETMETADATA_CSV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"LS_Multiple_CSV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevsource0.dfs.core.windows.net/"
+		},
+		"LS_REST_API_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://retoolapi.dev/5yDVOt/data"
+		},
+		"LS_SOURCE_CSV_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevsource0.dfs.core.windows.net/"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorksDW2025"
+		},
+		"LS_SQLSERVER_DB_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"LS_SQLSER_ADLS_SINK_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"LS_SQL_SERVER_Adventure_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"LS_SQL_SERVER_Adventure_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorksDW2025"
+		},
+		"LS_SQL_SERVER_Adventure_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"LS_sink_Parquet_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"LS_sink_multiple_csv_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"LS_sorce_excel_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevexcelsorce.dfs.core.windows.net/"
+		},
+		"LS_source_excel_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevexcelsorce.dfs.core.windows.net/"
+		},
+		"SqlServer1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"SqlServer1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "AdventureWorksDW2025"
+		},
+		"SqlServer1_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "sa"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "adfsavronproject123_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDataLakeStorage1_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage1_accountKey')]"
+					},
+					"AzureDataLakeStorage10_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage10_accountKey')]"
+					},
+					"AzureDataLakeStorage11_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage11_accountKey')]"
+					},
+					"AzureDataLakeStorage2_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage2_accountKey')]"
+					},
+					"AzureDataLakeStorage3_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage3_accountKey')]"
+					},
+					"AzureDataLakeStorage4_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage4_accountKey')]"
+					},
+					"AzureDataLakeStorage5_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage5_accountKey')]"
+					},
+					"AzureDataLakeStorage6_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage6_accountKey')]"
+					},
+					"AzureDataLakeStorage7_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage7_accountKey')]"
+					},
+					"AzureDataLakeStorage8_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage8_accountKey')]"
+					},
+					"AzureDataLakeStorage9_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage9_accountKey')]"
+					},
+					"LS_GETMETADATA_CSV_accountKey": {
+						"value": "[parameters('LS_GETMETADATA_CSV_accountKey')]"
+					},
+					"LS_Multiple_CSV_accountKey": {
+						"value": "[parameters('LS_Multiple_CSV_accountKey')]"
+					},
+					"LS_SOURCE_CSV_accountKey": {
+						"value": "[parameters('LS_SOURCE_CSV_accountKey')]"
+					},
+					"LS_SQLSER_ADLS_SINK_accountKey": {
+						"value": "[parameters('LS_SQLSER_ADLS_SINK_accountKey')]"
+					},
+					"LS_sink_Parquet_accountKey": {
+						"value": "[parameters('LS_sink_Parquet_accountKey')]"
+					},
+					"LS_sink_multiple_csv_accountKey": {
+						"value": "[parameters('LS_sink_multiple_csv_accountKey')]"
+					},
+					"LS_sorce_excel_accountKey": {
+						"value": "[parameters('LS_sorce_excel_accountKey')]"
+					},
+					"LS_source_excel_accountKey": {
+						"value": "[parameters('LS_source_excel_accountKey')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage10_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage10_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage11_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage11_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage2_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage2_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage3_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage3_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage4_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage4_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage5_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage5_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage6_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage6_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage7_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage7_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage8_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage8_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage9_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage9_properties_typeProperties_url')]"
+					},
+					"LS_GETMETADATA_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_GETMETADATA_CSV_properties_typeProperties_url')]"
+					},
+					"LS_Multiple_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_Multiple_CSV_properties_typeProperties_url')]"
+					},
+					"LS_REST_API_properties_typeProperties_url": {
+						"value": "[parameters('LS_REST_API_properties_typeProperties_url')]"
+					},
+					"LS_SOURCE_CSV_properties_typeProperties_url": {
+						"value": "[parameters('LS_SOURCE_CSV_properties_typeProperties_url')]"
+					},
+					"LS_SQLSER_ADLS_SINK_properties_typeProperties_url": {
+						"value": "[parameters('LS_SQLSER_ADLS_SINK_properties_typeProperties_url')]"
+					},
+					"LS_sink_Parquet_properties_typeProperties_url": {
+						"value": "[parameters('LS_sink_Parquet_properties_typeProperties_url')]"
+					},
+					"LS_sink_multiple_csv_properties_typeProperties_url": {
+						"value": "[parameters('LS_sink_multiple_csv_properties_typeProperties_url')]"
+					},
+					"LS_sorce_excel_properties_typeProperties_url": {
+						"value": "[parameters('LS_sorce_excel_properties_typeProperties_url')]"
+					},
+					"LS_source_excel_properties_typeProperties_url": {
+						"value": "[parameters('LS_source_excel_properties_typeProperties_url')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "adfsavronproject123_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"DS_SQLSERVER_password": {
+						"value": "[parameters('DS_SQLSERVER_password')]"
+					},
+					"DS_sql_server_password": {
+						"value": "[parameters('DS_sql_server_password')]"
+					},
+					"LS_SQLSERVER_DB_password": {
+						"value": "[parameters('LS_SQLSERVER_DB_password')]"
+					},
+					"LS_SQL_SERVER_Adventure_password": {
+						"value": "[parameters('LS_SQL_SERVER_Adventure_password')]"
+					},
+					"SqlServer1_password": {
+						"value": "[parameters('SqlServer1_password')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_server": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_server')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_database": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_database')]"
+					},
+					"DS_SQLSERVER_properties_typeProperties_userName": {
+						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_userName')]"
+					},
+					"DS_sql_server_properties_typeProperties_server": {
+						"value": "[parameters('DS_sql_server_properties_typeProperties_server')]"
+					},
+					"DS_sql_server_properties_typeProperties_database": {
+						"value": "[parameters('DS_sql_server_properties_typeProperties_database')]"
+					},
+					"DS_sql_server_properties_typeProperties_userName": {
+						"value": "[parameters('DS_sql_server_properties_typeProperties_userName')]"
+					},
+					"LS_SQLSERVER_DB_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQLSERVER_DB_properties_typeProperties_server')]"
+					},
+					"LS_SQLSERVER_DB_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQLSERVER_DB_properties_typeProperties_database')]"
+					},
+					"LS_SQLSERVER_DB_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQLSERVER_DB_properties_typeProperties_userName')]"
+					},
+					"LS_SQL_SERVER_Adventure_properties_typeProperties_server": {
+						"value": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_server')]"
+					},
+					"LS_SQL_SERVER_Adventure_properties_typeProperties_database": {
+						"value": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_database')]"
+					},
+					"LS_SQL_SERVER_Adventure_properties_typeProperties_userName": {
+						"value": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_userName')]"
+					},
+					"SqlServer1_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_server')]"
+					},
+					"SqlServer1_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_database')]"
+					},
+					"SqlServer1_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer1_properties_typeProperties_userName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfsavronproject123_ArmTemplate_0')]"
+			]
+		},
+		{
+			"name": "adfsavronproject123_ArmTemplate_2",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_2.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'adfsavronproject123_ArmTemplate_1')]"
+			]
+		}
+	]
+}
