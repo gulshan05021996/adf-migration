@@ -1,0 +1,15 @@
+{
+	"name": "adfsavronproject123",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "5df5ee93-d523-43a6-96c2-6253a6b435d4",
+		"tenantId": "1531217c-d49e-40e3-a8f8-ca8bd0c7d260"
+	}
+}
