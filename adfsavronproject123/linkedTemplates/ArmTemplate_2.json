@@ -75,7 +75,7 @@
 					"server": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_server')]",
 					"database": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_database')]",
 					"encrypt": "optional",
-					"trustServerCertificate": false,
+					"trustServerCertificate": true,
 					"authenticationType": "SQL",
 					"userName": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_userName')]",
 					"password": {
@@ -101,7 +101,7 @@
 					"server": "[parameters('SqlServer1_properties_typeProperties_server')]",
 					"database": "[parameters('SqlServer1_properties_typeProperties_database')]",
 					"encrypt": "optional",
-					"trustServerCertificate": false,
+					"trustServerCertificate": true,
 					"authenticationType": "SQL",
 					"userName": "[parameters('SqlServer1_properties_typeProperties_userName')]",
 					"password": {
@@ -127,7 +127,7 @@
 					"server": "[parameters('SqlServer2_properties_typeProperties_server')]",
 					"database": "[parameters('SqlServer2_properties_typeProperties_database')]",
 					"encrypt": "optional",
-					"trustServerCertificate": false,
+					"trustServerCertificate": true,
 					"authenticationType": "SQL",
 					"userName": "[parameters('SqlServer2_properties_typeProperties_userName')]",
 					"password": {
