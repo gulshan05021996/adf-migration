@@ -13,6 +13,389 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_ADLSCSV_to_CSVPAQUET')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_source_CSV",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Parquet1",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-10-29T16:53:14Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_REST API')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_REST_API",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "RestSource",
+								"httpRequestTimeout": "00:01:40",
+								"requestInterval": "00.00:00:00.010",
+								"requestMethod": "GET",
+								"paginationRules": {
+									"supportRFC5988": "true"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['id']"
+										},
+										"sink": {
+											"name": "id"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Sku']"
+										},
+										"sink": {
+											"name": "Sku"
+										}
+									},
+									{
+										"source": {
+											"path": "$['TP 1']"
+										},
+										"sink": {
+											"name": "tp1"
+										}
+									},
+									{
+										"source": {
+											"path": "$['TP 2']"
+										},
+										"sink": {
+											"name": "tp2"
+										}
+									},
+									{
+										"source": {
+											"path": "$['index']"
+										},
+										"sink": {
+											"name": "index"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Weight']"
+										},
+										"sink": {
+											"name": "Weight"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Catalog']"
+										},
+										"sink": {
+											"name": "Catalog"
+										}
+									},
+									{
+										"source": {
+											"path": "$['MRP Old']"
+										},
+										"sink": {
+											"name": "MRPOld"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Ajio MRP']"
+										},
+										"sink": {
+											"name": "AjioMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Category']"
+										},
+										"sink": {
+											"name": "Category"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Style Id']"
+										},
+										"sink": {
+											"name": "StyleId"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Paytm MRP']"
+										},
+										"sink": {
+											"name": "PaytmMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Amazon MRP']"
+										},
+										"sink": {
+											"name": "AmazonMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Myntra MRP']"
+										},
+										"sink": {
+											"name": "MyntraMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Flipkart MRP']"
+										},
+										"sink": {
+											"name": "FlipkartMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Limeroad MRP']"
+										},
+										"sink": {
+											"name": "LimeroadMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Snapdeal MRP']"
+										},
+										"sink": {
+											"name": "SnapdealMRP"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Final MRP Old']"
+										},
+										"sink": {
+											"name": "FinalMRPOld"
+										}
+									},
+									{
+										"source": {
+											"path": "$['Amazon FBA MRP']"
+										},
+										"sink": {
+											"name": "AmazonFBAMRP"
+										}
+									}
+								]
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DS_REST_API",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Parquet2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-11-07T10:29:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_SQLDATA_PIPELINE')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Stored procedure1",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[InsertCustomer]",
+							"storedProcedureParameters": {
+								"CustomerID": {
+									"value": "2",
+									"type": "Int32"
+								},
+								"FirstName": {
+									"value": "Nishu",
+									"type": "String"
+								},
+								"LastName": {
+									"value": "Jaiswal",
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DS_SQLSERVER",
+							"type": "LinkedServiceReference"
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-11-09T13:12:49Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/PL_delete_ADLS')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Delete1",
+						"type": "Delete",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "Binary1",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2026-11-07T13:54:20Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_multiple_CSV')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -433,6 +816,79 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/PL_Trigger')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy data1",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "ParquetSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings"
+								},
+								"formatSettings": {
+									"type": "ParquetWriteSettings"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "DelimitedText2",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Parquet3",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/PL_SQLSERVER_ADLS')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -610,6 +1066,37 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/datasets/SqlServerTable1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/trigger1_schedule')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "PL_Trigger",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Day",
+						"interval": 1,
+						"startTime": "2026-11-11T20:41:00",
+						"timeZone": "India Standard Time",
+						"schedule": {}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/PL_Trigger')]"
 			]
 		}
 	]

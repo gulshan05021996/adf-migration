@@ -77,6 +77,12 @@
 		"SqlServer1_password": {
 			"value": ""
 		},
+		"AzureDataLakeStorage12_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage13_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
 		},
@@ -181,6 +187,12 @@
 		},
 		"SqlServer1_properties_typeProperties_userName": {
 			"value": "sa"
+		},
+		"AzureDataLakeStorage12_properties_typeProperties_url": {
+			"value": "https://adlstriggerinput.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage13_properties_typeProperties_url": {
+			"value": "https://adlsdevouttrigger.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""

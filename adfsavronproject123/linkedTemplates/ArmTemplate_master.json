@@ -103,6 +103,14 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServer1'"
 		},
+		"AzureDataLakeStorage12_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage12'"
+		},
+		"AzureDataLakeStorage13_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage13'"
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
@@ -242,6 +250,14 @@
 		"SqlServer1_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sa"
+		},
+		"AzureDataLakeStorage12_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstriggerinput.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage13_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevouttrigger.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"type": "string",
@@ -405,6 +421,12 @@
 					"factoryName": {
 						"value": "[parameters('factoryName')]"
 					},
+					"AzureDataLakeStorage12_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage12_accountKey')]"
+					},
+					"AzureDataLakeStorage13_accountKey": {
+						"value": "[parameters('AzureDataLakeStorage13_accountKey')]"
+					},
 					"DS_SQLSERVER_password": {
 						"value": "[parameters('DS_SQLSERVER_password')]"
 					},
@@ -419,6 +441,12 @@
 					},
 					"SqlServer1_password": {
 						"value": "[parameters('SqlServer1_password')]"
+					},
+					"AzureDataLakeStorage12_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage12_properties_typeProperties_url')]"
+					},
+					"AzureDataLakeStorage13_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage13_properties_typeProperties_url')]"
 					},
 					"DS_SQLSERVER_properties_typeProperties_server": {
 						"value": "[parameters('DS_SQLSERVER_properties_typeProperties_server')]"

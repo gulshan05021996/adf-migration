@@ -7,6 +7,14 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfsavronproject123"
 		},
+		"AzureDataLakeStorage12_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage12'"
+		},
+		"AzureDataLakeStorage13_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage13'"
+		},
 		"DS_SQLSERVER_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'DS_SQLSERVER'"
@@ -26,6 +34,14 @@
 		"SqlServer1_password": {
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'SqlServer1'"
+		},
+		"AzureDataLakeStorage12_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstriggerinput.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage13_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlsdevouttrigger.dfs.core.windows.net/"
 		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
@@ -100,6 +116,40 @@
 				"type": "SelfHosted",
 				"typeProperties": {
 					"selfContainedInteractiveAuthoringEnabled": true
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage12')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage12_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage12_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage13')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage13_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage13_accountKey')]"
+					}
 				}
 			},
 			"dependsOn": []
@@ -491,396 +541,63 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_ADLSCSV_to_CSVPAQUET')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Copy data1",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": true,
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_source_CSV",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Parquet1",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage12",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"lastPublishTime": "2026-10-29T16:53:14Z"
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "inputcontainer"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "SIC_Code",
+						"type": "String"
+					},
+					{
+						"name": "Description",
+						"type": "String"
+					}
+				]
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_source_CSV')]",
-				"[concat(variables('factoryId'), '/datasets/Parquet1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage12')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/PL_REST API')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
+			"name": "[concat(parameters('factoryName'), '/Parquet3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
-				"activities": [
-					{
-						"name": "Copy_REST_API",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "RestSource",
-								"httpRequestTimeout": "00:01:40",
-								"requestInterval": "00.00:00:00.010",
-								"requestMethod": "GET",
-								"paginationRules": {
-									"supportRFC5988": "true"
-								}
-							},
-							"sink": {
-								"type": "ParquetSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings"
-								},
-								"formatSettings": {
-									"type": "ParquetWriteSettings"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"path": "$['id']"
-										},
-										"sink": {
-											"name": "id"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Sku']"
-										},
-										"sink": {
-											"name": "Sku"
-										}
-									},
-									{
-										"source": {
-											"path": "$['TP 1']"
-										},
-										"sink": {
-											"name": "tp1"
-										}
-									},
-									{
-										"source": {
-											"path": "$['TP 2']"
-										},
-										"sink": {
-											"name": "tp2"
-										}
-									},
-									{
-										"source": {
-											"path": "$['index']"
-										},
-										"sink": {
-											"name": "index"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Weight']"
-										},
-										"sink": {
-											"name": "Weight"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Catalog']"
-										},
-										"sink": {
-											"name": "Catalog"
-										}
-									},
-									{
-										"source": {
-											"path": "$['MRP Old']"
-										},
-										"sink": {
-											"name": "MRPOld"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Ajio MRP']"
-										},
-										"sink": {
-											"name": "AjioMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Category']"
-										},
-										"sink": {
-											"name": "Category"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Style Id']"
-										},
-										"sink": {
-											"name": "StyleId"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Paytm MRP']"
-										},
-										"sink": {
-											"name": "PaytmMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Amazon MRP']"
-										},
-										"sink": {
-											"name": "AmazonMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Myntra MRP']"
-										},
-										"sink": {
-											"name": "MyntraMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Flipkart MRP']"
-										},
-										"sink": {
-											"name": "FlipkartMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Limeroad MRP']"
-										},
-										"sink": {
-											"name": "LimeroadMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Snapdeal MRP']"
-										},
-										"sink": {
-											"name": "SnapdealMRP"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Final MRP Old']"
-										},
-										"sink": {
-											"name": "FinalMRPOld"
-										}
-									},
-									{
-										"source": {
-											"path": "$['Amazon FBA MRP']"
-										},
-										"sink": {
-											"name": "AmazonFBAMRP"
-										}
-									}
-								]
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DS_REST_API",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Parquet2",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage13",
+					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"lastPublishTime": "2026-11-07T10:29:55Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/DS_REST_API')]",
-				"[concat(variables('factoryId'), '/datasets/Parquet2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_SQLDATA_PIPELINE')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Stored procedure1",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[InsertCustomer]",
-							"storedProcedureParameters": {
-								"CustomerID": {
-									"value": "2",
-									"type": "Int32"
-								},
-								"FirstName": {
-									"value": "Nishu",
-									"type": "String"
-								},
-								"LastName": {
-									"value": "Jaiswal",
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "DS_SQLSERVER",
-							"type": "LinkedServiceReference"
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "outputcontainer"
+					},
+					"compressionCodec": "snappy"
 				},
-				"annotations": [],
-				"lastPublishTime": "2026-11-09T13:12:49Z"
+				"schema": []
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/DS_SQLSERVER')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_delete_ADLS')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Delete1",
-						"type": "Delete",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "Binary1",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"enableLogging": false,
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true,
-								"enablePartitionDiscovery": false
-							}
-						}
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2026-11-07T13:54:20Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/Binary1')]"
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage13')]"
 			]
 		}
 	]
