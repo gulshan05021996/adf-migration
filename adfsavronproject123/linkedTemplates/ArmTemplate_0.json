@@ -27,6 +27,10 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage13'"
 		},
+		"AzureDataLakeStorage14_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage14'"
+		},
 		"AzureDataLakeStorage2_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage2'"
@@ -79,10 +83,6 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_sink_Parquet'"
 		},
-		"LS_sink_multiple_csv_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'LS_sink_multiple_csv'"
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
@@ -102,6 +102,10 @@
 		"AzureDataLakeStorage13_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevouttrigger.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage14_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
 		},
 		"AzureDataLakeStorage2_properties_typeProperties_url": {
 			"type": "string",
@@ -156,10 +160,6 @@
 			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
 		},
 		"LS_sink_Parquet_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
-		},
-		"LS_sink_multiple_csv_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
 		}
@@ -248,6 +248,23 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('AzureDataLakeStorage13_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage14')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage14_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('AzureDataLakeStorage14_accountKey')]"
 					}
 				}
 			},
@@ -485,23 +502,6 @@
 					"accountKey": {
 						"type": "SecureString",
 						"value": "[parameters('LS_sink_Parquet_accountKey')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_sink_multiple_csv')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('LS_sink_multiple_csv_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('LS_sink_multiple_csv_accountKey')]"
 					}
 				}
 			},

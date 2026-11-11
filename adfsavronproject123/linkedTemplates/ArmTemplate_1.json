@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "adfsavronproject123"
 		},
+		"LS_sink_multiple_csv_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'LS_sink_multiple_csv'"
+		},
 		"LS_sorce_excel_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_sorce_excel'"
@@ -14,10 +18,6 @@
 		"LS_source_excel_accountKey": {
 			"type": "secureString",
 			"metadata": "Secure string for 'accountKey' of 'LS_source_excel'"
-		},
-		"AzureDataLakeStorage14_accountKey": {
-			"type": "secureString",
-			"metadata": "Secure string for 'accountKey' of 'AzureDataLakeStorage14'"
 		},
 		"DS_SQLSERVER_password": {
 			"type": "secureString",
@@ -31,9 +31,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'LS_SQLSERVER_DB'"
 		},
-		"LS_SQL_SERVER_Adventure_password": {
-			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'LS_SQL_SERVER_Adventure'"
+		"LS_sink_multiple_csv_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
 		},
 		"LS_sorce_excel_properties_typeProperties_url": {
 			"type": "string",
@@ -42,10 +42,6 @@
 		"LS_source_excel_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevexcelsorce.dfs.core.windows.net/"
-		},
-		"AzureDataLakeStorage14_properties_typeProperties_url": {
-			"type": "string",
-			"defaultValue": "https://adlstarget.dfs.core.windows.net/"
 		},
 		"DS_SQLSERVER_properties_typeProperties_server": {
 			"type": "string",
@@ -82,24 +78,29 @@
 		"LS_SQLSERVER_DB_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "sa"
-		},
-		"LS_SQL_SERVER_Adventure_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "LAPTOP\\MSSQLSERVER2025"
-		},
-		"LS_SQL_SERVER_Adventure_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "AdventureWorksDW2025"
-		},
-		"LS_SQL_SERVER_Adventure_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "sa"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/LS_sink_multiple_csv')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('LS_sink_multiple_csv_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('LS_sink_multiple_csv_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/LS_sorce_excel')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -141,24 +142,7 @@
 			"properties": {
 				"type": "SelfHosted",
 				"typeProperties": {
-					"selfContainedInteractiveAuthoringEnabled": true
-				}
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage14')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureBlobFS",
-				"typeProperties": {
-					"url": "[parameters('AzureDataLakeStorage14_properties_typeProperties_url')]",
-					"accountKey": {
-						"type": "SecureString",
-						"value": "[parameters('AzureDataLakeStorage14_accountKey')]"
-					}
+					"selfContainedInteractiveAuthoringEnabled": false
 				}
 			},
 			"dependsOn": []
@@ -242,7 +226,9 @@
 				},
 				"schema": []
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/LS_sink_multiple_csv')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DS_REST_API')]",
@@ -466,6 +452,37 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/Parquet4')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage14",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Parquet",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileSystem": "output"
+					},
+					"compressionCodec": "snappy"
+				},
+				"schema": [
+					{
+						"name": "SIC_Code",
+						"type": "UTF8"
+					},
+					{
+						"name": "Description",
+						"type": "UTF8"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DS_SQLSERVER')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -538,34 +555,6 @@
 					"password": {
 						"type": "SecureString",
 						"value": "[parameters('LS_SQLSERVER_DB_password')]"
-					}
-				},
-				"connectVia": {
-					"referenceName": "integrationRuntime1",
-					"type": "IntegrationRuntimeReference"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/integrationRuntimes/integrationRuntime1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/LS_SQL_SERVER_Adventure')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "SqlServer",
-				"typeProperties": {
-					"server": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_server')]",
-					"database": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_database')]",
-					"encrypt": "optional",
-					"trustServerCertificate": false,
-					"authenticationType": "SQL",
-					"userName": "[parameters('LS_SQL_SERVER_Adventure_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('LS_SQL_SERVER_Adventure_password')]"
 					}
 				},
 				"connectVia": {
