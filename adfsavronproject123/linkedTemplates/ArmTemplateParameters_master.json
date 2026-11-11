@@ -83,6 +83,12 @@
 		"SqlServer1_password": {
 			"value": ""
 		},
+		"SqlServer2_password": {
+			"value": ""
+		},
+		"AzureDataLakeStorage14_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
 		},
@@ -196,6 +202,18 @@
 		},
 		"trigger_stogare_event_properties_typeProperties_scope": {
 			"value": "/subscriptions/5c4d6a6d-2f02-4b0c-917f-2b0d68d0b807/resourceGroups/rgdevchevronproject/providers/Microsoft.Storage/storageAccounts/adlstriggerinput"
+		},
+		"SqlServer2_properties_typeProperties_server": {
+			"value": "LAPTOP\\MSSQLSERVER2025"
+		},
+		"SqlServer2_properties_typeProperties_database": {
+			"value": "AdventureWorksDW2025"
+		},
+		"SqlServer2_properties_typeProperties_userName": {
+			"value": "sa"
+		},
+		"AzureDataLakeStorage14_properties_typeProperties_url": {
+			"value": "https://adlstarget.dfs.core.windows.net/"
 		},
 		"containerUri": {
 			"value": ""
