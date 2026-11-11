@@ -11,7 +11,7 @@
 			"trustServerCertificate": false,
 			"authenticationType": "SQL",
 			"userName": "sa",
-			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI2NThiZGIzZS02NzI5LTQ2OGUtODgwZi0yMTY0ODBjMGE3YTEiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiJhYzA3MTIwNy00Zjk2LTRkYzUtOGNiYS0yOGQzOGZlZjQzYTgiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
 		},
 		"connectVia": {
 			"referenceName": "integrationRuntime1",
