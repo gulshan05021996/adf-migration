@@ -14,6 +14,12 @@
 		"AzureDataLakeStorage11_accountKey": {
 			"value": ""
 		},
+		"AzureDataLakeStorage12_accountKey": {
+			"value": ""
+		},
+		"AzureDataLakeStorage13_accountKey": {
+			"value": ""
+		},
 		"AzureDataLakeStorage2_accountKey": {
 			"value": ""
 		},
@@ -77,12 +83,6 @@
 		"SqlServer1_password": {
 			"value": ""
 		},
-		"AzureDataLakeStorage12_accountKey": {
-			"value": ""
-		},
-		"AzureDataLakeStorage13_accountKey": {
-			"value": ""
-		},
 		"AzureDataLakeStorage1_properties_typeProperties_url": {
 			"value": "https://dbstoragehnafnm4vhux7s.dfs.core.windows.net/"
 		},
@@ -91,6 +91,12 @@
 		},
 		"AzureDataLakeStorage11_properties_typeProperties_url": {
 			"value": "https://adlstarget.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage12_properties_typeProperties_url": {
+			"value": "https://adlstriggerinput.dfs.core.windows.net/"
+		},
+		"AzureDataLakeStorage13_properties_typeProperties_url": {
+			"value": "https://adlsdevouttrigger.dfs.core.windows.net/"
 		},
 		"AzureDataLakeStorage2_properties_typeProperties_url": {
 			"value": "https://adlstarget.dfs.core.windows.net/"
@@ -187,12 +193,6 @@
 		},
 		"SqlServer1_properties_typeProperties_userName": {
 			"value": "sa"
-		},
-		"AzureDataLakeStorage12_properties_typeProperties_url": {
-			"value": "https://adlstriggerinput.dfs.core.windows.net/"
-		},
-		"AzureDataLakeStorage13_properties_typeProperties_url": {
-			"value": "https://adlsdevouttrigger.dfs.core.windows.net/"
 		},
 		"trigger_stogare_event_properties_typeProperties_scope": {
 			"value": "/subscriptions/5c4d6a6d-2f02-4b0c-917f-2b0d68d0b807/resourceGroups/rgdevchevronproject/providers/Microsoft.Storage/storageAccounts/adlstriggerinput"
