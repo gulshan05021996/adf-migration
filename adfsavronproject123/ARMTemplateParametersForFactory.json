@@ -193,6 +193,9 @@
 		},
 		"AzureDataLakeStorage13_properties_typeProperties_url": {
 			"value": "https://adlsdevouttrigger.dfs.core.windows.net/"
+		},
+		"trigger_stogare_event_properties_typeProperties_scope": {
+			"value": "/subscriptions/5c4d6a6d-2f02-4b0c-917f-2b0d68d0b807/resourceGroups/rgdevchevronproject/providers/Microsoft.Storage/storageAccounts/adlstriggerinput"
 		}
 	}
 }

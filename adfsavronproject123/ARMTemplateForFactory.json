@@ -258,6 +258,10 @@
 		"AzureDataLakeStorage13_properties_typeProperties_url": {
 			"type": "string",
 			"defaultValue": "https://adlsdevouttrigger.dfs.core.windows.net/"
+		},
+		"trigger_stogare_event_properties_typeProperties_scope": {
+			"type": "string",
+			"defaultValue": "/subscriptions/5c4d6a6d-2f02-4b0c-917f-2b0d68d0b807/resourceGroups/rgdevchevronproject/providers/Microsoft.Storage/storageAccounts/adlstriggerinput"
 		}
 	},
 	"variables": {
@@ -2196,7 +2200,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/trigger1_schedule')]",
+			"name": "[concat(parameters('factoryName'), '/trigger_stogare_event')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
 			"properties": {
@@ -2211,15 +2215,14 @@
 						"parameters": {}
 					}
 				],
-				"type": "ScheduleTrigger",
+				"type": "BlobEventsTrigger",
 				"typeProperties": {
-					"recurrence": {
-						"frequency": "Day",
-						"interval": 1,
-						"startTime": "2026-11-11T20:41:00",
-						"timeZone": "India Standard Time",
-						"schedule": {}
-					}
+					"blobPathBeginsWith": "/inputcontainer/blobs/",
+					"ignoreEmptyBlobs": true,
+					"scope": "[parameters('trigger_stogare_event_properties_typeProperties_scope')]",
+					"events": [
+						"Microsoft.Storage.BlobCreated"
+					]
 				}
 			},
 			"dependsOn": [
